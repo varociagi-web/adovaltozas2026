@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adóváltozások 2026 | SukorADÓ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #4a9d5f;
+            --dark-green: #2d5f3d;
+            --light-green: #e8f5e9;
+            --accent-teal: #00897b;
+            --warm-beige: #f5f1ed;
+            --text-dark: #2c3e50;
+            --text-gray: #546e7a;
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 12px 32px rgba(74, 157, 95, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #fafafa 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-30px, 30px) rotate(180deg); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 900;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-year {
+            font-size: clamp(56px, 12vw, 88px);
+            font-weight: 900;
+            line-height: 1;
+            margin: 10px 0;
+            background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--accent-teal);
+        }
+
+        .intro-card h2 {
+            color: var(--primary-green);
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .intro-card p {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .category {
+            margin-bottom: 24px;
+        }
+
+        .category-header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--card-shadow);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .category-header:hover::before,
+        .category.active .category-header::before {
+            transform: scaleX(1);
+        }
+
+        .category-header:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--light-green);
+        }
+
+        .category.active .category-header {
+            border-color: var(--primary-green);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-title h3 {
+            font-size: 20px;
+            color: var(--dark-green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            font-size: 28px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .toggle-icon {
+            font-size: 24px;
+            color: var(--primary-green);
+            transition: transform 0.3s ease;
+        }
+
+        .category.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .category-summary {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category.active .category-content {
+            max-height: 5000px;
+        }
+
+        .content-inner {
+            background: var(--light-green);
+            border-radius: 0 0 16px 16px;
+            padding: 28px;
+            margin-top: 16px;
+        }
+
+        .detail-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--accent-teal);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section h4 {
+            color: var(--dark-green);
+            font-size: 17px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .detail-section li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .detail-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-left: 4px solid #ff9800;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);
+        }
+
+        .highlight-box strong {
+            color: #e65100;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffe5e5 0%, #ffd6d6 100%);
+            border-left: 4px solid #d32f2f;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+        }
+
+        .warning-box strong {
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #d1e7f8 100%);
+            border-left: 4px solid #1976d2;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+        }
+
+        .number-badge {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: var(--primary-green);
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--light-green);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .footer-contact {
+            color: var(--text-gray);
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .footer-name {
+            font-size: 20px;
+            color: var(--dark-green);
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        .footer-email {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-email:hover {
+            color: var(--primary-green);
+        }
+
+        @media (max-width: 768px) {
+            .category-header {
+                padding: 20px;
+            }
+
+            .content-inner {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gyors navigáció */
+        .quick-nav {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .quick-nav-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-bottom: 12px;
+        }
+
+        .quick-nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quick-nav-buttons button {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 157, 95, 0.2);
+        }
+
+        .quick-nav-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 157, 95, 0.3);
+        }
+
+        .quick-nav-buttons button:active {
+            transform: translateY(0);
+        }
+
+        /* Interaktív kérdőív */
+        .interactive-quiz {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 2px solid var(--primary-green);
+        }
+
+        .interactive-quiz h3 {
+            color: var(--dark-green);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .quiz-question {
+            margin: 12px 0;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .quiz-question select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-green);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .quiz-question select:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+        }
+
+        #relevanceResult {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        #relevanceResult a {
+            transition: all 0.2s ease;
+        }
+
+        #relevanceResult a:hover {
+            color: var(--accent-teal) !important;
+            text-decoration: none !important;
+        }
+
+        /* Összefoglaló kártyák */
+        .summary-cards {
+            margin-bottom: 30px;
+        }
+
+        .summary-cards h3 {
+            color: var(--dark-green);
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .card-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark-green);
+            margin-bottom: 4px;
+        }
+
+        .card-detail {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        /* Határidő figyelmeztető */
+        .deadline-alert {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            border: 2px solid #ff9800;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
+        }
+
+        .alert-icon {
+            font-size: 48px;
+            line-height: 1;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-content h3 {
+            color: #e65100;
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .deadline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+
+        .deadline-date {
+            font-weight: 600;
+            color: #e65100;
+            min-width: 120px;
+            font-size: 14px;
+        }
+
+        .deadline-desc {
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        /* Kategória kiemelés (highlighted) */
+        .category.highlighted {
+            animation: pulse 2s ease-in-out 3;
+        }
+
+        .category.highlighted .category-header {
+            border-color: #ff9800;
+            background: linear-gradient(135deg, #fff9e6 0%, white 100%);
+        }
+
+        .category.highlighted .category-header::before {
+            background: linear-gradient(90deg, #ff9800, #f57c00);
+            transform: scaleX(1);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deadline-alert {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .alert-icon {
+                font-size: 36px;
+            }
+
+            .deadline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .deadline-date {
+                min-width: auto;
+            }
+
+            .quick-nav-buttons button {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Adóváltozások</h1>
+        <div class="hero-year">2026</div>
+        <p>Minden fontos információ egy helyen – átláthatóan, strukturáltan</p>
+        <div class="logo-text">SUKORADÓ</div>
+    </div>
+
+    <div class="container">
+        <!-- Kedves Ügyfelünk -->
+        <div class="intro-card fade-in">
+            <h2>📋 Kedves Ügyfelünk!</h2>
+            <p>Összegyűjtöttük a 2026-ot érintő legfontosabb adóváltozásokat. Az alábbi témákra kattintva gyorsan átnézheted, hogy mely szabályok vonatkoznak rád és a vállalkozásodra. A teljes, részletes szakmai összefoglalót a kapott e-mail mellékleteként is megtalálod.</p>
+        </div>
+
+        <!-- Gyors navigáció -->
+        <div class="quick-nav fade-in">
+            <div class="quick-nav-title">🚀 Gyors ugrás:</div>
+            <div class="quick-nav-buttons">
+                <button onclick="scrollToCategory('afa')">ÁFA</button>
+                <button onclick="scrollToCategory('kata')">KATA</button>
+                <button onclick="scrollToCategory('atalany')">Átalányadó</button>
+                <button onclick="scrollToCategory('kiva')">KIVA</button>
+                <button onclick="scrollToCategory('tao')">TAO</button>
+                <button onclick="scrollToCategory('szja')">SZJA</button>
+                <button onclick="scrollToCategory('berek')">Bérek</button>
+                <button onclick="scrollToCategory('egyeb')">Egyéb</button>
+            </div>
+        </div>
+
+        <!-- Interaktív kérdőív -->
+        <div class="interactive-quiz fade-in">
+            <h3>💡 Mi változott számodra?</h3>
+            <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-gray);">Válaszolj 2 gyors kérdésre, és kiemeljük a rád vonatkozó legfontosabb változásokat!</p>
+            
+            <div class="quiz-question">
+                <label><strong>Milyen formában dolgozol/vállalkozol?</strong></label>
+                <select id="vallalkozasForma" onchange="updateRelevance()">
+                    <option value="">Válassz...</option>
+                    <option value="kata">KATA</option>
+                    <option value="atalany">Átalányadó (egyéni vállalkozó)</option>
+                    <option value="kiva">KIVA (társas vállalkozás)</option>
+                    <option value="tao">TAO (társas vállalkozás - társasági adó)</option>
+                    <option value="munkavisz">Munkavállaló</option>
+                </select>
+            </div>
+
+            <div class="quiz-question">
+                <label><strong>Van alkalmazottad?</strong></label>
+                <select id="vanAlkalmazott" onchange="updateRelevance()">
+                    <option value="">Válassz...</option>
+                    <option value="igen">Igen</option>
+                    <option value="nem">Nem</option>
+                </select>
+            </div>
+
+            <div id="relevanceResult" style="display: none; margin-top: 16px;"></div>
+        </div>
+
+        <!-- Összefoglaló kártyák -->
+        <div class="summary-cards fade-in">
+            <h3>📊 5 legfontosabb változás 2026-ban</h3>
+            <div class="cards-grid">
+                <div class="summary-card">
+                    <div class="card-number">1</div>
+                    <div class="card-title">Minimálbér emelkedés</div>
+                    <div class="card-value">322.800 Ft</div>
+                    <div class="card-detail">+21% növekedés</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-number">2</div>
+                    <div class="card-title">ÁFA alanyi mentesség</div>
+                    <div class="card-value">20M Ft</div>
+                    <div class="card-detail">Korábbi 18M helyett</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-number">3</div>
+                    <div class="card-title">Átalányadó költséghányad</div>
+                    <div class="card-value">45%</div>
+                    <div class="card-detail">Korábbi 40% helyett</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-number">4</div>
+                    <div class="card-title">E-nyugta kötelezettség</div>
+                    <div class="card-value">Szept. 1.</div>
+                    <div class="card-detail">Felkészülés ideje!</div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-number">5</div>
+                    <div class="card-title">TB-kiskönyv megszűnik</div>
+                    <div class="card-value">Jan. 1.</div>
+                    <div class="card-detail">e-TB kiskönyv jön</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Határidő figyelmeztető -->
+        <div class="deadline-alert fade-in">
+            <div class="alert-icon">⏰</div>
+            <div class="alert-content">
+                <h3>FONTOS HATÁRIDŐ 2026</h3>
+                <div class="deadline-list">
+                    <div class="deadline-item">
+                        <span class="deadline-date">Szeptember 1.</span>
+                        <span class="deadline-desc">E-nyugta kötelezettség kezdete – Készülj fel időben!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁFA -->
+        <div class="category fade-in" id="afa">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">🧾</span> ÁFA (Általános Forgalmi Adó)</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">Alanyi adómentesség emelése, új 5%-os tételek, e-nyugta kötelezettség</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>💰 Alanyi adómentesség emelése</h4>
+                        <div class="highlight-box">
+                            <strong>2026. január 1-től: 20 millió Ft</strong><br>
+                            (2027-től tervezett: 22 millió Ft, 2028-tól: 24 millió Ft)
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🥩 5%-os ÁFA bővülése</h4>
+                        <ul>
+                            <li>Háziasított szarvasmarha húsa</li>
+                            <li>Vágási melléktermékek és belsőségek</li>
+                            <li>Friss, hűtött vagy fagyasztott formában</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📱 E-nyugta kötelezettség - 2026. szeptember 1-től</h4>
+                        <div class="warning-box">
+                            <strong>FONTOS!</strong> Akik jelenleg kézi nyugtát állítanak ki, azoknak nyár végén mindenképpen foglalkozniuk kell ezzel!
+                        </div>
+                        <p style="margin: 16px 0; font-weight: 500;">Két lehetőség:</p>
+                        <ul>
+                            <li><strong>E-nyugta program használata</strong> (Billingo, Számlázz.hu, NAV ingyenes app)</li>
+                            <li><strong>Kézi nyugta + 3 naponkénti feltöltés</strong> a NAV-hoz (nem javasolt!)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KATA -->
+        <div class="category fade-in" id="kata">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">👤</span> KATA (Kisadózó Vállalkozások Tételes Adója)</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">50.000 Ft/hó, 18M Ft árbevételi határ, csak magánszemélyek kiszolgálása</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>📊 Változatlan szabályok</h4>
+                        <ul>
+                            <li>Csak főfoglalkozásban lehetséges</li>
+                            <li>Kizárólag magánszemélyeket lehet kiszolgálni</li>
+                            <li>Havi adó összege: <strong>50.000 Ft</strong></li>
+                            <li>TB-ellátás alapja: <strong>108.000 Ft/hó</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>💵 Bevételi határok</h4>
+                        <div class="info-box">
+                            <strong>18 millió Ft/év nettó árbevételig:</strong> csak a tételes adó (50.000 Ft/hó)<br>
+                            <strong>18 millió Ft felett:</strong> 40% adó a különbözetre
+                        </div>
+                        <p style="margin-top: 12px; font-size: 14px; color: var(--text-gray);">Az ÁFA alanyi adómentesség 20 millió Ft-os határa rájuk is vonatkozik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Átalányadó -->
+        <div class="category fade-in" id="atalany">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">📊</span> ÁTALÁNYADÓ</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">Költséghányad emelése 45%-ra, egyszerűsített költségelszámolás</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>📈 Költséghányad emelése</h4>
+                        <div class="highlight-box">
+                            <strong>2026.01.01-től: 45%</strong> (jelenleg 40%)<br>
+                            <strong>2027.01.01-től tervezett: 50%</strong>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 14px; color: var(--text-gray);">A 80%-os és 90%-os költséghányadok változatlanul megmaradnak.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🎯 Költséghányadok tevékenység szerint</h4>
+                        
+                        <div style="margin: 16px 0;">
+                            <strong style="color: var(--primary-green);">45% költséghányad (ÁLTALÁNOS)</strong>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--text-gray);">A bevétel 55%-a számít jövedelemnek - a legtöbb tevékenységnél</p>
+                        </div>
+
+                        <div style="margin: 16px 0;">
+                            <strong style="color: var(--primary-green);">80% költséghányad</strong>
+                            <ul style="margin-top: 8px;">
+                                <li>Mező- és erdőgazdálkodás</li>
+                                <li>Feldolgozóipar</li>
+                                <li>Építőipari tevékenységek</li>
+                                <li>Gépek és járművek javítása</li>
+                                <li>Taxi, járműkölcsönzés</li>
+                                <li>Áruszállítás</li>
+                                <li>Fodrászat, szépségápolás</li>
+                                <li>Vendéglátás</li>
+                                <li>Postai szolgáltatás</li>
+                            </ul>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--text-gray);">A bevétel 20%-a számít jövedelemnek</p>
+                        </div>
+
+                        <div style="margin: 16px 0;">
+                            <strong style="color: var(--primary-green);">90% költséghányad</strong>
+                            <ul style="margin-top: 8px;">
+                                <li>Kiskereskedelmi tevékenységek (élelmiszer, iparcikk, zöldség, hús, pékáru, festék, vasáru, stb.)</li>
+                                <li>Kiskereskedelmi tevékenység mellett nyújtott postai szolgáltatás</li>
+                            </ul>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--text-gray);">A bevétel 10%-a számít jövedelemnek</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>💰 Bevételi határok 2026-ban</h4>
+                        <div class="info-box">
+                            <strong>Egyéni vállalkozók:</strong><br>
+                            Átalányadózás választható <strong>38.736.000 Ft bevételig</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🆓 SZJA-mentes bevételi határok 2026-ban</h4>
+                        <div class="highlight-box">
+                            Nem kell SZJA-t fizetni, ha a bevétel nem haladja meg:
+                        </div>
+                        <table style="margin-top: 12px;">
+                            <tr>
+                                <th>Költséghányad</th>
+                                <th>SZJA-mentes bevételi határ</th>
+                            </tr>
+                            <tr>
+                                <td><strong>45%</strong> költséghányad</td>
+                                <td><strong>3.521.455 Ft</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>80%</strong> költséghányad</td>
+                                <td><strong>9.684.000 Ft</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>90%</strong> költséghányad</td>
+                                <td><strong>19.368.000 Ft</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>💵 Adófizetési kötelezettség</h4>
+                        <div class="warning-box">
+                            Az SZJA-mentes határ feletti bevételből számított jövedelem után:
+                            <ul style="margin-top: 8px;">
+                                <li>15% SZJA</li>
+                                <li>18,5% TB-járulék</li>
+                                <li>13% SZOCHO</li>
+                                <li><strong>Összesen: 46,5%</strong> a számított adóköteles jövedelem után</li>
+                            </ul>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 14px; color: var(--text-gray);">Az átalányadós jövedelem összevonandó, így SZJA-kedvezmények (családi kedvezmény, első házasok kedvezménye, stb.) igénybe vehetők.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>👔 Főfoglalkozású vállalkozók járulékfizetése</h4>
+                        <div class="info-box">
+                            <strong>Főfoglalkozású</strong> egyéni vállalkozónak (nincs 36 órás munkaviszony, nem nappali tagozatos tanuló, nem nyugdíjas):
+                        </div>
+                        <table style="margin-top: 12px;">
+                            <tr>
+                                <th>Alap</th>
+                                <th>Havi fizetési kötelezettség</th>
+                            </tr>
+                            <tr>
+                                <td>Minimálbér (322.800 Ft)</td>
+                                <td><strong>101.682 Ft/hó</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Garantált bérminimum (373.200 Ft)</td>
+                                <td><strong>117.558 Ft/hó</strong></td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 12px; font-size: 13px; color: var(--text-gray);">Befizetés negyedévente esedékes, de havonta is lehet fizetni.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📝 Egyéb szabályok</h4>
+                        <ul>
+                            <li><strong>Nem főfoglalkozású</strong> vállalkozóknál: nincs havi járulékminimum, csak az adóköteles jövedelem után 46,5%</li>
+                            <li><strong>Nyugdíjasok:</strong> csak 15% SZJA a jövedelem után (nincs TB-járulék és SZOCHO)</li>
+                            <li><strong>Költségnyilvántartás:</strong> NEM kell, csak a bevételt kell figyelni</li>
+                            <li><strong>Számlák megőrzése:</strong> kötelező!</li>
+                            <li><strong>Járulékbevallás:</strong> 2026-tól minden egyéni vállalkozó negyedévente adja be az '58-as bevallást</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KIVA -->
+        <div class="category fade-in" id="kiva">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">🏢</span> KIVA (Kisvállalati Adó)</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">10% adómérték, könnyítések a társas vállalkozók kivétjénél</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>📉 Társas vállalkozók könnyítése</h4>
+                        <div class="highlight-box">
+                            <strong>ÚJ 2026-tól:</strong> A KIVA alapja a kivét 100%-a, nincs 112,5%-os szorzó!
+                        </div>
+                        <ul style="margin-top: 12px;">
+                            <li>Kiváltja a 13% szocho-t és 9% társasági adót</li>
+                            <li>Helyi iparűzési adónál választható: KIVA-alap 1,2-szerese</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>💳 Elektronikus pénzeszközök</h4>
+                        <ul>
+                            <li>BinX, Revolut, Wise, PayPal egyenlegét</li>
+                            <li>2026.01.01-től NEM kell figyelembe venni a pénztár értékénél</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📈 Értékhatárok emelkedése</h4>
+                        <table>
+                            <tr>
+                                <th>Kritérium</th>
+                                <th>Határ</th>
+                            </tr>
+                            <tr>
+                                <td>KIVA választás - létszám</td>
+                                <td><strong>100 fő</strong></td>
+                            </tr>
+                            <tr>
+                                <td>KIVA választás - árbevétel</td>
+                                <td><strong>6 milliárd Ft</strong></td>
+                            </tr>
+                            <tr>
+                                <td>KIVA választás - mérlegfőösszeg</td>
+                                <td><strong>6 milliárd Ft</strong></td>
+                            </tr>
+                            <tr>
+                                <td>KIVA megszűnés - árbevétel</td>
+                                <td><strong>12 milliárd Ft</strong></td>
+                            </tr>
+                            <tr>
+                                <td>KIVA megszűnés - létszám</td>
+                                <td><strong>200 fő</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>⚠️ KIVA megszűnés okai</h4>
+                        <div class="warning-box">
+                            <strong>Figyelem!</strong> KIVA-ból kieshet, aki:
+                            <ul style="margin-top: 8px;">
+                                <li>Elmulasztja a számla-/nyugtakibocsátást</li>
+                                <li>Be nem jelentett alkalmazottat foglalkoztat</li>
+                                <li>Nettó adótartozása meghaladja az 1 millió Ft-ot</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAO -->
+        <div class="category fade-in" id="tao">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">🏛️</span> TAO (Társasági Adó)</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">9% adómérték, IV. negyedévi előleg határidő változás</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>📊 TAO mértéke</h4>
+                        <div class="info-box">
+                            <strong>Változatlan: 9%</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📅 TAO-előleg befizetési határidő VÁLTOZÁS</h4>
+                        <div class="highlight-box">
+                            <strong>2026.01.01-től új határidő!</strong>
+                        </div>
+                        <table style="margin-top: 12px;">
+                            <tr>
+                                <th>Időszak</th>
+                                <th>Befizetési határidő</th>
+                            </tr>
+                            <tr>
+                                <td>I. negyedév</td>
+                                <td>Április 20.</td>
+                            </tr>
+                            <tr>
+                                <td>II. negyedév</td>
+                                <td>Július 20.</td>
+                            </tr>
+                            <tr>
+                                <td>III. negyedév</td>
+                                <td>Október 20.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IV. negyedév</strong></td>
+                                <td><strong>December 20.</strong> (korábban: január 20.)</td>
+                            </tr>
+                        </table>
+                        <div class="warning-box" style="margin-top: 16px;">
+                            <strong>⚠️ FONTOS VÁLTOZÁS:</strong><br>
+                            A IV. negyedévi TAO-előleget már NEM január 20-ig kell befizetni!<br>
+                            <strong>Új határidő: a IV. negyedév 3. hónapjának 20. napja</strong> (általános esetben december 20.)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SZJA -->
+        <div class="category fade-in" id="szja">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">💼</span> SZJA (Személyi Jövedelemadó)</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">15% mérték, anyák kedvezménye, 25 év alattiak mentessége</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>🎯 SZJA mértéke</h4>
+                        <div class="info-box">
+                            <strong>Változatlan: 15%</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🆕 Új adómentes jövedelmek</h4>
+                        <ul>
+                            <li>Családi pótlék</li>
+                            <li>GYES (gyermekgondozási segély)</li>
+                            <li>Anyasági támogatás</li>
+                            <li>GYET (gyermeknevelési támogatás)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🔢 Kedvezmények sorrendje (ÚJ 2026-tól)</h4>
+                        <p style="margin-bottom: 12px; font-weight: 500;">A sorrend azért fontos, mert ha "elfogyott" az SZJA, a következő kedvezményt már nem lehet érvényesíteni.</p>
+                        
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">1</span><strong>30 év alatti anyák kedvezménye</strong>
+                            <p style="margin-left: 36px; margin-top: 4px; font-size: 13px; color: var(--text-gray);">Az év utolsó hónapjáig, amely évben betölti a 30. életévét</p>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">2</span><strong>Anyák kedvezményei:</strong>
+                            <ul style="margin-left: 36px; margin-top: 8px;">
+                                <li><strong>NÉTAK</strong> - 4 vagy több gyermekes anyák</li>
+                                <li><strong>HÁTAK</strong> - 3 gyermekes anyák (2025.10.01-től)</li>
+                                <li><strong>KÉTAK</strong> - 2 gyermekes anyák (40. életév 2025.12.31. után)</li>
+                            </ul>
+                            <div class="info-box" style="margin-left: 36px; margin-top: 12px;">
+                                <strong>SZJA-mentes jövedelmek anyáknak:</strong> munkabér, nem önálló tevékenység, vállalkozói kivét, átalányadós jövedelem, megbízási díj<br>
+                                <strong>NEM mentes:</strong> osztalék, ingatlan bérbeadás
+                            </div>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">3</span><strong>CSED, GYED, örökbefogadói díj</strong>
+                            <p style="margin-left: 36px; margin-top: 4px; font-size: 13px; color: var(--text-gray);">2025.07.01-től SZJA-mentes</p>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">4</span><strong>25 év alatti fiatalok kedvezménye</strong>
+                            <div class="highlight-box" style="margin-left: 36px; margin-top: 8px;">
+                                Havi <strong>715.765 Ft</strong> bruttó jövedelemig SZJA-mentes:<br>
+                                bér, megbízási díj, vállalkozói kivét, átalányadós jövedelem
+                            </div>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">5</span><strong>Személyi kedvezmény</strong>
+                            <p style="margin-left: 36px; margin-top: 4px;">Súlyosan fogyatékos személyek: <strong>16.140 Ft/hó</strong> (minimálbér 1/3-ada: 107.600 Ft után 15%)</p>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">6</span><strong>Első házasok kedvezménye</strong>
+                            <p style="margin-left: 36px; margin-top: 4px;"><strong>5.000 Ft/hó</strong> (33.335 Ft adóalap)</p>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <span class="number-badge">7</span><strong>Családi kedvezmény</strong>
+                            <p style="margin-left: 36px; margin-top: 8px; font-size: 14px; color: var(--text-dark);"><strong>Havonta, gyerekenként:</strong></p>
+                            <table style="margin-left: 36px; margin-top: 8px;">
+                                <tr>
+                                    <th>Eltartottak száma</th>
+                                    <th>Adóalap-kedvezmény<br>(havonta/gyerek)</th>
+                                    <th>SZJA-ban<br>(havonta/gyerek)</th>
+                                    <th>Összesen<br>(ha 2/3 gyerek)</th>
+                                </tr>
+                                <tr>
+                                    <td>1 eltartott</td>
+                                    <td>133.340 Ft</td>
+                                    <td>20.000 Ft</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>2 eltartott</td>
+                                    <td>133.330 Ft/gyerek</td>
+                                    <td>20.000 Ft/gyerek</td>
+                                    <td><strong>80.000 Ft</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>3+ eltartott</td>
+                                    <td>146.667 Ft/gyerek</td>
+                                    <td>22.000 Ft/gyerek</td>
+                                    <td><strong>66.000 Ft (3 gyerek)</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Tartósan beteg/fogyatékos plusz</td>
+                                    <td>133.340 Ft</td>
+                                    <td>20.000 Ft</td>
+                                    <td>-</td>
+                                </tr>
+                            </table>
+                            <p style="margin-left: 36px; margin-top: 12px; font-size: 13px; color: var(--text-gray);"><strong>Példa:</strong> 2 gyermek esetén gyerekenként 40.000 Ft SZJA-kedvezmény, azaz összesen <strong>80.000 Ft/hó</strong> megtakarítás!</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📝 Nyilatkozat kedvezményekhez</h4>
+                        <div class="warning-box">
+                            A NÉTAK, HÁTAK, KÉTAK és 30 év alatti anyák kedvezményének nyilatkozata:<br>
+                            <strong>✓ Beadható a családi kedvezmény nyilatkozatban</strong><br>
+                            <strong>✓ Visszavonásig érvényes</strong> (nem kell évente beadni!)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bérek és járulékok -->
+        <div class="category fade-in" id="berek">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">💰</span> Bérek és Járulékok</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">Minimálbér 322.800 Ft, garantált bérminimum 373.200 Ft</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>💵 2026-os bérek</h4>
+                        <table>
+                            <tr>
+                                <th>Megnevezés</th>
+                                <th>2025</th>
+                                <th>2026</th>
+                                <th>Emelkedés</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Minimálbér</strong></td>
+                                <td>266.800 Ft</td>
+                                <td><strong>322.800 Ft</strong></td>
+                                <td>+21%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Garantált bérminimum</strong></td>
+                                <td>326.000 Ft</td>
+                                <td><strong>373.200 Ft</strong></td>
+                                <td>+14,5%</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📊 Járulékváltozások</h4>
+                        <table>
+                            <tr>
+                                <th>Járulék</th>
+                                <th>Alapja</th>
+                                <th>Mértéke</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Egészségügyi szolgáltatási járulék</strong></td>
+                                <td>Minimálbér: 322.800 Ft</td>
+                                <td>12.300 Ft/hó</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Szakképzési hozzájárulás</strong></td>
+                                <td>Bruttó bér</td>
+                                <td>1,5%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rehabilitációs hozzájárulás</strong></td>
+                                <td>Minimálbér 9-szerese</td>
+                                <td>2.905.200 Ft/fő/év</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🧮 NAV-nak utalandó összegek (havonta)</h4>
+                        <div class="highlight-box">
+                            <strong>Minimálbéres munkavállaló után (322.800 Ft):</strong><br>
+                            • TB-járulék (18,5%): 59.718 Ft<br>
+                            • SZJA (15%): 48.420 Ft<br>
+                            • SZOCHO (13%): 41.964 Ft<br>
+                            <strong>Összesen: 150.102 Ft</strong>
+                        </div>
+                        <div class="info-box" style="margin-top: 12px;">
+                            <strong>Garantált bérminimumnál (373.200 Ft):</strong><br>
+                            • TB-járulék (18,5%): 69.042 Ft<br>
+                            • SZJA (15%): 55.980 Ft<br>
+                            • SZOCHO (13%): 48.516 Ft<br>
+                            <strong>Összesen: 173.538 Ft</strong>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 13px; color: var(--text-gray);">Emelkedés 2025-höz képest: egyéni/társas vállalkozónál +7.678 Ft, munkavállalónál +13.346 Ft</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>👵 Nyugdíjasok alkalmazása</h4>
+                        <div class="highlight-box">
+                            <strong>NAGYON MEGÉRI nyugdíjast alkalmazni!</strong><br><br>
+                            ✓ Csak 15% SZJA-t kell levonni (nem 33,5%-ot)<br>
+                            ✓ Nem kell 13% szocho vagy 10% KIVA<br>
+                            ✓ <strong>3+ gyermekes nyugdíjas anyánál SZJA sem!</strong><br><br>
+                            → Bruttó = Nettó = Költség (3+ gyermekes anyánál)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Egyéb változások -->
+        <div class="category fade-in" id="egyeb">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <div class="category-title">
+                    <h3><span class="category-icon">📌</span> Egyéb Fontos Változások</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-summary">TB-kiskönyv, CSED, éttermi reprezentáció, pálinka adómentesség</div>
+            </div>
+            <div class="category-content">
+                <div class="content-inner">
+                    <div class="detail-section">
+                        <h4>📄 Cégbizonyítvány, cégkivonat, cégmásolat</h4>
+                        <div class="warning-box">
+                            2026.01.01-től csak akkor <strong>közhiteles</strong>, ha:<br>
+                            ✓ Cégbíróság adja ki, vagy<br>
+                            ✓ Céginformációs szolgálat adja ki<br><br>
+                            → Más szolgáltatótól NEM érdemes vásárolni!
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🚗 Útdíjak emelkedése 2026.01.01-től</h4>
+                        <ul>
+                            <li>Gyorsforgalmi utak díja (J2, M3): <strong>+7,8%</strong></li>
+                            <li>Főutak használati díja: <strong>+59,5%</strong></li>
+                            <li>Bírságtételek: <strong>~+30%</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🚙 Zöld rendszámok 2026.11.30-tól</h4>
+                        <div class="warning-box">
+                            <strong>5N és 5P környezetvédelmi osztály:</strong><br>
+                            • 2026.11.29-ig közlekedhetnek zöld rendszámmal<br>
+                            • 2026.11.30-tól helyszíni ellenőrzésnél <strong>ELVESZIK</strong> a rendszámot<br>
+                            • Járművet kivonják a forgalomból a csere előtt
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>📇 TB-kiskönyv MEGSZŰNIK 2026.01.01-től</h4>
+                        <ul>
+                            <li>Felváltja az <strong>e-TB kiskönyv</strong> (elektronikus nyilvántartás)</li>
+                            <li>Foglalkoztatónál lévő TB-kiskönyveket át kell adni a munkavállalónak</li>
+                            <li>Megőrzési kötelezettség: öregségi nyugdíjkorhatár + 5 év végéig</li>
+                            <li>Lekérdezés: EESZT felületen "Betegéletút szolgáltatás"</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>👶 CSED változások 2025.07.01-től</h4>
+                        <div class="info-box">
+                            <strong>Rövidebb tilalmi időszak:</strong><br>
+                            • Születéstől számított 90 napig NEM lehet dolgozni<br>
+                            • 3 hónapos kor után LEHET dolgozni<br>
+                            • Munkavégzés mellett: CSED <strong>70%-a</strong> jár
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🍽️ Éttermi reprezentáció - ADÓMENTES</h4>
+                        <div class="highlight-box">
+                            <strong>Mi adómentes?</strong><br>
+                            Üzleti partner, ügyfél étterembe vitelének költsége<br><br>
+                            <strong>Felső határ:</strong><br>
+                            • Éves bevétel 1%-a, DE<br>
+                            • Maximum 100 millió Ft<br><br>
+                            → Nem kell SZJA, szocho (33,04% vagy 27,7% helyett 0%)
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🥃 Pálinka - ADÓMENTES vendéglátás/ajándék</h4>
+                        <div class="info-box">
+                            <strong>Feltételek:</strong><br>
+                            ✓ Magyar adóraktárban előállított<br>
+                            ✓ Onnan közvetlenül vásárolt<br>
+                            ✓ Pálinkazárjeggyel ellátott<br>
+                            ✓ <strong>Külön nyilvántartást kell vezetni!</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>🏨 Turizmusfejlesztési hozzájárulás CSÖKKENTÉSE</h4>
+                        <div class="highlight-box">
+                            Éttermi vendéglátás után:<br>
+                            <strong>2% (korábban 4%)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer fade-in">
+            <div class="footer-contact">Ha bármivel kapcsolatban kérdés merül fel, kérlek jelezd!</div>
+            <div class="footer-name">Váróci Ágnes</div>
+            <a href="/cdn-cgi/l/email-protection#7704021c18051613183704021c1805161318591f02" class="footer-email"><span class="__cf_email__" data-cfemail="9eedebf5f1ecfffaf1deedebf5f1ecfffaf1b0f6eb">[email&#160;protected]</span></a>
+            <div style="margin-top: 20px; font-size: 13px; color: var(--text-gray);">
+                📞 +36 30 493 3303
+            </div>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0; font-size: 12px; color: var(--text-gray);">
+                SukorADÓ Könyvelőiroda • www.sukorado-konyveles.hu
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function toggleCategory(header) {
+            const category = header.parentElement;
+            const wasActive = category.classList.contains('active');
+            
+            // Close all categories
+            document.querySelectorAll('.category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            
+            // Open clicked category if it wasn't active
+            if (!wasActive) {
+                category.classList.add('active');
+                // Smooth scroll to top of category with offset for better viewing
+                setTimeout(() => {
+                    const headerOffset = 80; // Extra space at top
+                    const elementPosition = category.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        }
+
+        // Gyors navigáció
+        function scrollToCategory(categoryId) {
+            const category = document.getElementById(categoryId);
+            if (category) {
+                // Calculate position with offset
+                const headerOffset = 80;
+                const elementPosition = category.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                // Scroll to element
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Open the category
+                setTimeout(() => {
+                    category.classList.add('active');
+                    // Add highlight effect
+                    category.classList.add('highlighted');
+                    setTimeout(() => {
+                        category.classList.remove('highlighted');
+                    }, 6000);
+                }, 500);
+            }
+        }
+
+        // Interaktív kérdőív - relevancia meghatározás
+        function updateRelevance() {
+            const forma = document.getElementById('vallalkozasForma').value;
+            const alkalmazott = document.getElementById('vanAlkalmazott').value;
+            const resultDiv = document.getElementById('relevanceResult');
+
+            if (!forma || !alkalmazott) {
+                resultDiv.style.display = 'none';
+                return;
+            }
+
+            let relevantCategories = [];
+            let message = '<strong>🎯 Ezek a legfontosabbak számodra:</strong><br><br>';
+
+            // Mindenki
+            relevantCategories.push('afa');
+            relevantCategories.push('szja');
+
+            // Forma szerint
+            if (forma === 'kata') {
+                relevantCategories.push('kata');
+                message += '• <a href="#" onclick="scrollToCategory(\'kata\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">KATA</a> - Változatlan szabályok, 18M Ft határ<br>';
+            } else if (forma === 'atalany') {
+                relevantCategories.push('atalany');
+                message += '• <a href="#" onclick="scrollToCategory(\'atalany\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">Átalányadó</a> - Költséghányad 45%-ra emelkedik!<br>';
+            } else if (forma === 'kiva') {
+                relevantCategories.push('kiva');
+                message += '• <a href="#" onclick="scrollToCategory(\'kiva\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">KIVA</a> - Könnyítések a vállalkozói kivétnél<br>';
+            } else if (forma === 'tao') {
+                relevantCategories.push('tao');
+                message += '• <a href="#" onclick="scrollToCategory(\'tao\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">TAO</a> - IV. negyedévi előleg határidő: december 20.!<br>';
+            }
+
+            // Ha van alkalmazott
+            if (alkalmazott === 'igen') {
+                relevantCategories.push('berek');
+                message += '• <a href="#" onclick="scrollToCategory(\'berek\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">Bérek</a> - Minimálbér 322.800 Ft, garantált bérminimum 373.200 Ft<br>';
+            }
+
+            // Mindenki
+            message += '• <a href="#" onclick="scrollToCategory(\'afa\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">ÁFA</a> - Alanyi mentesség 20M Ft-ra emelkedik<br>';
+            message += '• <a href="#" onclick="scrollToCategory(\'szja\'); return false;" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">SZJA</a> - Anyák kedvezménye, 25 év alattiak mentessége<br>';
+
+            // E-nyugta figyelmeztetés
+            if (forma === 'kata' || forma === 'atalany') {
+                relevantCategories.push('egyeb');
+                message += '<br><strong style="color: #e65100;">⚠️ FONTOS:</strong> Szeptember 1-től <a href="#" onclick="scrollToCategory(\'egyeb\'); return false;" style="color: #e65100; font-weight: 600; text-decoration: underline;">e-nyugta kötelezettség</a>!<br>';
+            }
+
+            // TAO-s cégeknek külön figyelmeztetés
+            if (forma === 'tao') {
+                message += '<br><strong style="color: #e65100;">⚠️ FONTOS:</strong> IV. negyedévi TAO-előleg már <a href="#" onclick="scrollToCategory(\'tao\'); return false;" style="color: #e65100; font-weight: 600; text-decoration: underline;">december 20-ig</a>!<br>';
+            }
+
+            resultDiv.innerHTML = message;
+            resultDiv.style.display = 'block';
+
+            // Highlight relevant categories
+            document.querySelectorAll('.category').forEach(cat => {
+                cat.classList.remove('highlighted');
+            });
+
+            relevantCategories.forEach(catId => {
+                const cat = document.getElementById(catId);
+                if (cat) {
+                    setTimeout(() => {
+                        cat.classList.add('highlighted');
+                        setTimeout(() => {
+                            cat.classList.remove('highlighted');
+                        }, 6000);
+                    }, 300);
+                }
+            });
+        }
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.category').forEach(category => {
+            observer.observe(category);
+        });
+    </script>
+</body>
+</html>
